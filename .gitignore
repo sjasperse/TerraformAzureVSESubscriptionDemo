@@ -1,0 +1,15 @@
+# Dotnet stuff
+bin/
+obj/
+.vs/
+*.publish/
+*.publish.zip
+
+# Terraform stuff
+.terraform/
+terraform.tfstate
+.terraform.tfstate.lock.info
+terraform.tfstate.backup
+
+# Demo stuff
+env.tfvars
