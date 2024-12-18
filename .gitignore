@@ -13,3 +13,4 @@ terraform.tfstate.backup
 
 # Demo stuff
 env.tfvars
+docs/Presentation.pptx

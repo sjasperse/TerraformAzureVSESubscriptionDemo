@@ -1,5 +1,5 @@
 resource "azurerm_service_plan" "main" {
-  name                = "${var.resource_prefix}3-${var.environment}-app-plan"
+  name                = "${var.resource_prefix}3-${local.locationSafeName}-app-plan"
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_resource_group.main.location
   os_type             = "Linux"
@@ -7,7 +7,7 @@ resource "azurerm_service_plan" "main" {
 }
 
 resource "azurerm_linux_web_app" "main" {
-  name                            = "${var.resource_prefix}3-${var.environment}-app"
+  name                            = "${var.resource_prefix}3-${local.locationSafeName}-app"
   resource_group_name             = azurerm_resource_group.main.name
   location                        = azurerm_service_plan.main.location
   service_plan_id                 = azurerm_service_plan.main.id
@@ -19,6 +19,6 @@ resource "azurerm_linux_web_app" "main" {
   }
 
   app_settings = {
-    APPLICATIONINSIGHTS_CONNECTION_STRING = azurerm_application_insights.main.connection_string
+    APPLICATIONINSIGHTS_CONNECTION_STRING = var.app_insights_connection_string
   }
 }

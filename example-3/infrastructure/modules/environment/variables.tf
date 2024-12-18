@@ -6,7 +6,11 @@ variable "subscription_id" {
     type = string
 }
 
-variable "environment" {
+variable "location" {
+    type = string
+}
+
+variable "app_insights_connection_string" {
     type = string
 }
 

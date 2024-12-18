@@ -1,3 +1,4 @@
+# from https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs#example-usage
 terraform {
   required_providers {
     azurerm = {
@@ -7,14 +8,6 @@ terraform {
   }
 }
 
-variable "resource_prefix" {
-    type = string
-}
-
-variable "subscription_id" {
-    type = string
-}
-
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
   features {}
@@ -22,8 +15,7 @@ provider "azurerm" {
   subscription_id = var.subscription_id
 }
 
-# From https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_web_app
-
+# from https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_web_app
 resource "azurerm_resource_group" "example" {
   name     = "example-1"
   location = "East US 2"
@@ -48,4 +40,11 @@ resource "azurerm_linux_web_app" "example" {
       dotnet_version = "8.0" 
     }
   }
+}
+
+# from https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password
+resource "random_password" "password" {
+  length           = 16
+  special          = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
 }

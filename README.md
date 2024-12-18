@@ -1,9 +1,5 @@
+# Terraform + Azure VSE Subscription Demo
 
-## Command pallet:
-```sh
- PS> Set-ExecutionPolicy Unrestricted
- PS> ./Register-Providers.ps1
- PS infrastructure> terraform init
- PS infrastructure> terraform apply -var-file="../../env.tfvars"
- PS> ./deploy.ps1
-```
+Presentation plus 3 examples, talking about using the Azure Subscription provided with your Visual Studio Enterprise/MSDN license, and using terraform to run infrastructure experiments.
+
+Presentation slides are in the `docs/` folder, and the Marp VSCode extension was used to generate and present them.
