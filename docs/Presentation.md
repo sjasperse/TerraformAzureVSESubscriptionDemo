@@ -9,6 +9,7 @@ class:
 
 by Scott Jasperse
 
+https://github.com/sjasperse/TerraformAzureVSESubscriptionDemo/
 
 ---
 ## Azure VSE Subscription
@@ -28,7 +29,7 @@ by Scott Jasperse
 - Many "Providers"
   - Azure, AWS, GCP, DigitalOcean, Kubernetes...
 - Is not a "one configuration, multiple cloud" solution.
-
+- Azurerm provider is built on top of Azure's ARM json templates.
 
 ---
 ## Terraform - Why?
@@ -37,7 +38,8 @@ by Scott Jasperse
   - Version trackable, repeatable, auditable
 - Keep track of a working environment, without needing to keep the resources around.
 - Can create, and destroy on demand.
-- Use infrastructure to inject configuration, so you don't have to configure it manually.
+- Use infrastructure to control configuration, so you don't have to configure it manually.
+- I find it a good way to learn how resources work and how they fit together.
 
 ---
 ## Terraform - Why?
@@ -63,7 +65,7 @@ by Scott Jasperse
 
 Simple example for a hello world app deployed to Azure.
 
-Nearly entirely copy/pasted from: [azurerm example-usage](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs#example-usage), [azurerm - linux_web_app](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_web_app), [random - password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password)
+Nearly entirely copy/pasted from: [azurerm: example-usage](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs#example-usage), [azurerm: linux_web_app](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_web_app), [random: password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password)
 
 Commands I will be using:
 ```sh
@@ -79,8 +81,10 @@ Commands I will be using:
 ## Terraform - State
 
 - Lets look at `terraform.tfstate`
-- More state storage options:
-  - Check out https://developer.hashicorp.com/terraform/language/backend/azurerm
+  - Terraform's master copy of what it knows and manages. Needs to be only one copy.
+  - Contains sensitive data - so needs to stay out of version control. 
+- State storage options:
+  - Check out https://developer.hashicorp.com/terraform/language/backend
 
 
 ---
@@ -101,7 +105,7 @@ Commands I will be using:
 ----
 ## Example 3
 
-Simple web app infrastructure, deployed to 2 regions using a reusable module, using a shared app insights.
+Simple web app infrastructure, deployed to 2 regions using a reusable module, and a shared app insights.
 
 Commands I will be using:
 ```sh
