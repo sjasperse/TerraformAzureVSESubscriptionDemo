@@ -29,3 +29,9 @@ resource "azurerm_cosmosdb_sql_container" "stuff" {
   partition_key_version = 1
   throughput            = 400
 }
+
+resource "azurerm_key_vault_secret" "cosmos_connection_string" {
+  key_vault_id = azurerm_key_vault.main.id
+  name = "CosmosConnectionString"
+  value = azurerm_cosmosdb_account.main.primary_sql_connection_string
+}

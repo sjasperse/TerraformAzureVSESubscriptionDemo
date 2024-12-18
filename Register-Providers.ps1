@@ -16,3 +16,8 @@ $tfvars = Get-EnvTfvars
 $subscriptionId = $tfvars.subscription_id
 
 az provider register --namespace Microsoft.App --subscription $subscriptionId
+az provider register --namespace Microsoft.DocumentDB --subscription $subscriptionId
+az provider register --namespace Microsoft.KeyVault --subscription $subscriptionId
+az provider register --namespace Microsoft.ManagedIdentity --subscription $subscriptionId
+az provider register --namespace Microsoft.Storage --subscription $subscriptionId
+az provider register --namespace Microsoft.Web --subscription $subscriptionId
