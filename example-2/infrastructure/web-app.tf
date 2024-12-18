@@ -25,6 +25,8 @@ resource "azurerm_linux_web_app" "main" {
   }
 
   app_settings = {
+    "AZURE_CLIENT_ID" = azurerm_user_assigned_identity.WebApp.client_id
+    "ConnectionStrings__CosmosEndpoint" = azurerm_cosmosdb_account.main.endpoint
     "ConnectionStrings__Cosmos" = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.cosmos_connection_string.versionless_id})"
   }
 }
@@ -39,4 +41,22 @@ resource "azurerm_role_assignment" "WebApp_KVS" {
   scope                = azurerm_key_vault.main.id
   role_definition_name = "Key Vault Secrets User"
   principal_id         = azurerm_user_assigned_identity.WebApp.principal_id
+}
+
+resource "azurerm_cosmosdb_sql_role_assignment" "WebApp_CosmosDataContributor" {
+  resource_group_name = azurerm_cosmosdb_account.main.resource_group_name
+  account_name        = azurerm_cosmosdb_account.main.name
+
+  role_definition_id  = "${azurerm_cosmosdb_account.main.id}/sqlRoleDefinitions/00000000-0000-0000-0000-000000000002" # Azure Cosmos DB Built-in Data Contributor
+  principal_id        = azurerm_user_assigned_identity.WebApp.principal_id
+  scope               = azurerm_cosmosdb_account.main.id # this role is a cosmos role, and it needs to be applied at the cosmos account or deeper
+}
+
+resource "azurerm_cosmosdb_sql_role_assignment" "CurrentUser_CosmosDataContributor" {
+  resource_group_name = azurerm_cosmosdb_account.main.resource_group_name
+  account_name        = azurerm_cosmosdb_account.main.name
+
+  role_definition_id  = "${azurerm_cosmosdb_account.main.id}/sqlRoleDefinitions/00000000-0000-0000-0000-000000000002" # Azure Cosmos DB Built-in Data Contributor
+  principal_id        = data.azurerm_client_config.current.object_id
+  scope               = azurerm_cosmosdb_account.main.id # this role is a cosmos role, and it needs to be applied at the cosmos account or deeper
 }
