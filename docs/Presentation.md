@@ -36,10 +36,9 @@ by Scott Jasperse
 
 - Infrastructure-as-Code
   - Version trackable, repeatable, auditable
-- Keep track of what worked, without needing to keep the resources around.
+- Keep track of a working environment, without needing to keep the resources around.
 - Can create, and destroy on demand.
 - Use infrastructure to inject configuration, so you don't have to configure it manually.
-
 
 ---
 ![bg right](power-aladdin.png)
@@ -68,12 +67,20 @@ Simple example for a hello world app deployed to Azure.
 
 Commands you may need:
 ```sh
- > Set-ExecutionPolicy Unrestricted
- > ./Register-Providers.ps1
  infrastructure> terraform init
+ infrastructure> terraform plan -var-file="../../env.tfvars"
  infrastructure> terraform apply -var-file="../../env.tfvars"
  > ./deploy.ps1
+ infrastructure> terraform destroy -var-file="../../env.tfvars"
 ```
+
+---
+
+## Terraform
+
+- Looks look at `terraform.tfstate`
+- Backends
+  - Check out https://developer.hashicorp.com/terraform/language/backend/azurerm
 
 ---
 
@@ -84,24 +91,29 @@ Simple web app, connected to Cosmos, using Key Vault, and User-Managed Identity 
 Commands you may need:
 ```sh
  infrastructure> terraform init
+ infrastructure> terraform plan -var-file="../../env.tfvars"
  infrastructure> terraform apply -var-file="../../env.tfvars"
  > ./deploy.ps1
+ infrastructure> terraform destroy -var-file="../../env.tfvars"
 ```
 
 ----
 
 ## Example 3
 
-`3a` Is only a log analytics workspace.
+Assumes an already existing log analytics workspace in a `example-3-shared` resource group, named `{yourprefix}3-logs`.
 
-`3b` Simple web app infrastructure, deployed to 2 environments.
+Simple web app infrastructure, deployed to 2 environments using a reusable module.
 
 
 Commands you may need:
 ```sh
  infrastructure> terraform init
+ infrastructure> terraform plan -var-file="../../env.tfvars"
  infrastructure> terraform apply -var-file="../../env.tfvars"
  > ./deploy.ps1
+ infrastructure> terraform destroy -var-file="../../env.tfvars"
+
 ```
 
 ---

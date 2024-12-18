@@ -30,7 +30,7 @@ resource "azurerm_resource_group" "example" {
 }
 
 resource "azurerm_service_plan" "example" {
-  name                = "${var.resource_prefix}-app-plan"
+  name                = "${var.resource_prefix}1-app-plan"
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
   os_type             = "Linux"
@@ -38,7 +38,7 @@ resource "azurerm_service_plan" "example" {
 }
 
 resource "azurerm_linux_web_app" "example" {
-  name                = "${var.resource_prefix}-app"
+  name                = "${var.resource_prefix}1-app"
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_service_plan.example.location
   service_plan_id     = azurerm_service_plan.example.id
