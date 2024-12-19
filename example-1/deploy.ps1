@@ -13,10 +13,10 @@ function Get-EnvTfvars() {
 }
 
 $tfvars = Get-EnvTfvars
-$appName = "$($tfvars.resource_prefix)-app"
+$appName = "$($tfvars.resource_prefix)1-app"
 $subscriptionId = $tfvars.subscription_id
 
-dotnet publish WebApp -o ./WebApp.publish
+dotnet publish WebApp -o ./WebApp.publish --runtime linux-x64
 Compress-Archive -Path "./WebApp.publish/*" -DestinationPath "WebApp.publish.zip" -Force
 
 "Deploying..."

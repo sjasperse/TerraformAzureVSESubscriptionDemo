@@ -11,6 +11,9 @@ terraform.tfstate
 .terraform.tfstate.lock.info
 terraform.tfstate.backup
 
+# Normally this would be included, but it might confuse the Demo
+.terraform.lock.hcl
+
 # Demo stuff
 env.tfvars
 docs/Presentation.pptx
